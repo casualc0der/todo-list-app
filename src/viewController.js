@@ -39,32 +39,34 @@ const viewController = (()=> {
   dueDate.id = 'dueDate';
 
   const priority = document.createElement('select');
+
   const highPriority = document.createElement('option');
   highPriority.value = 'high'
-  highPriority.innerHTML = 'high'  
+  highPriority.innerHTML = 'High'  
+
   const normalPriority = document.createElement('option');
   normalPriority.value = 'normal'
-  normalPriority.innerHTML = 'normal';  
+  normalPriority.innerHTML = 'Normal';  
+
   const lowPriority = document.createElement('option');
   lowPriority.value = 'low';
-  lowPriority.innerHTML = 'low';  
+  lowPriority.innerHTML = 'Low';  
  
   priority.appendChild(highPriority);
   priority.appendChild(normalPriority);  
   priority.appendChild(lowPriority);  
-  
+  priority.id = 'priority'; 
 
-  priority.id = 'priority';  
+  const addButton = document.createElement('button');
+  addButton.id = 'addButton';
+  addButton.innerHTML = "Add To-Do";  
 
-   
-    body[0].appendChild(title);
-    body[0].appendChild(description);
-    body[0].appendChild(dueDate);
-    body[0].appendChild(priority);
-    
-  
-
-
+  body[0].appendChild(todoInputCard);
+  todoInputCard.appendChild(title);
+  todoInputCard.appendChild(description);
+  todoInputCard.appendChild(dueDate);
+  todoInputCard.appendChild(priority);
+  todoInputCard.appendChild(addButton);  
     
     } 
 
@@ -72,12 +74,7 @@ const viewController = (()=> {
 
       createButton: createButton,
       createInputForm: createInputForm
-
 }
-
-
-
-
 })();
 
 

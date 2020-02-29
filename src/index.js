@@ -7,5 +7,5 @@ import { viewController } from './viewController.js'
 const consoleLogger = () => console.log('Hello!');
 
 
-viewController.createButton('Hello!', consoleLogger);
-viewController.createInputForm();
+//viewController.createButton('Hello!', consoleLogger);
+viewController.createButton('New Form', viewController.createInputForm)
