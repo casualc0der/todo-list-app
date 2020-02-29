@@ -1,11 +1,9 @@
-import{ project } from './project.js'
+import { project } from './project.js'
 import { viewController } from './viewController.js'
 
 
 
 
-const consoleLogger = () => console.log('Hello!');
 
 
-//viewController.createButton('Hello!', consoleLogger);
 viewController.createButton('New Form', viewController.createInputForm)
