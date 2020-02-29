@@ -57,7 +57,7 @@ const viewController = (()=> {
   priority.id = 'priority';  
 
    
-   body[0].appendChild(title);
+    body[0].appendChild(title);
     body[0].appendChild(description);
     body[0].appendChild(dueDate);
     body[0].appendChild(priority);
