@@ -8,3 +8,4 @@ const consoleLogger = () => console.log('Hello!');
 
 
 viewController.createButton('Hello!', consoleLogger);
+viewController.createInputForm();
