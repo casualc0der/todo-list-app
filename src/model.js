@@ -1,37 +1,25 @@
 const model = (() => {
-
   const project = (name) => {
-
-    let todoLists = [];
-
+    const todoLists = [];
     const addToDoList = (title, description) => {
-
-      todoLists.push({title, description})
-    }
-
-
+      todoLists.push({title, description});
+    };
     const retriveToDoLists = () => console.log(todoLists);
-   
-  
-    return { name, retriveToDoLists, addToDoList };
-  
-  }
+
+    return {name, retriveToDoLists, addToDoList};
+  };
 
   const createProject = (name) => {
-    if(!name) {
+    if (!name) {
       return;
     }
-    let newProject = project(name);
+    const newProject = project(name);
     projectLists.push(newProject);
-  }
-
-
-   let projectLists = [];
-
+  };
+  const projectLists = [];
   const retrieveProjects = () => projectLists;
 
-  return { createProject, retrieveProjects }
+  return {createProject, retrieveProjects};
 })();
-
 
 export {model};
