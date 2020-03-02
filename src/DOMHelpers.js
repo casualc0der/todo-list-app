@@ -34,12 +34,26 @@ const helpers = (()=> {
     }
   };
 
+  const renderTodos = (project) => {
+    console.log(project)
+    const node = document.getElementById('todoLists');
+    clearSection(node.id);
+    const toDoLists = project.retriveToDoLists();
+    createSection('div','todoLists', project.name, 'todoCard');
+    const list = document.getElementById(project.name);
+    node.appendChild(list);
+  
+    list.innerHTML = toDoLists;
+
+  }
+
   return {
     createButton,
     createSection,
     addInnerHTML,
     clearInputText,
-    clearSection};
+    clearSection, 
+    renderTodos};
 })();
 
 export {helpers};

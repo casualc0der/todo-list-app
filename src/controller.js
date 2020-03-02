@@ -5,12 +5,6 @@ import {helpers} from './DOMHelpers.js';
 const controller = (() => {
   document.addEventListener('DOMContentLoaded', renderer);
 
-  const projectInput = document.createElement('input');
-  helpers.createSection('div', 'main-content', 'projectAdd', 'projectAdd');
-  const nodle = document.getElementById('projectAdd');
-  projectInput.id = 'newProjectName';
-  nodle.appendChild(projectInput);
-  helpers.createSection('div', 'main-content', 'projectArea', 'projects');
   const newProjectName = document.getElementById('newProjectName');
 
   helpers.createButton('Add project', () => {
@@ -21,9 +15,10 @@ const controller = (() => {
     data.forEach((e) => {
       const id = `project-id${data.indexOf(e)}`;
       helpers.createSection('div', 'projectArea', id, 'x');
-      helpers.createButton(e.name, e.retriveToDoLists, id, e.name);
+      helpers.createButton(e.name, () => helpers.renderTodos(e), id, e.name);
     });
   }, 'projectAdd', 'hello');
+
 })();
 
 export {controller};

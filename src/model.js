@@ -4,7 +4,7 @@ const model = (() => {
     const addToDoList = (title, description) => {
       todoLists.push({title, description});
     };
-    const retriveToDoLists = () => console.log(todoLists);
+    const retriveToDoLists = () => todoLists;
 
     return {name, retriveToDoLists, addToDoList};
   };
