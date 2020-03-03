@@ -5,8 +5,16 @@ const renderer = (() => {
   helpers.createSection('div', 'main-content', 'projects', 'projects');
   helpers.createSection('div', 'main-content', 'projectAdd', 'projectAdd');
   helpers.createSection('div', 'main-content', 'projectArea', 'projects');
-  helpers.createSection('div', 'main-content', 'toDoModal', 'modalContent');
-  
+  helpers.createSection('div', 'main-content', 'toDoModal', 'modal');
+  helpers.createSection('div','toDoModal', 'toDoModalContent', 'modal-content')
+  helpers.createSection('span', 'toDoModalContent', 'todoClose', 'close');
+  helpers.addInnerHTML('todoClose', '&times;');
+  helpers.createSection('div', 'toDoModalContent', 'toDoForm', 'form')
+  helpers.createSection('input', 'toDoForm', 'formTitle', 'todoform')
+  helpers.createSection('input', 'toDoForm', 'formDescription', 'todoform')
+  helpers.createSection('input', 'toDoForm', 'formDueDate', 'todoform')
+  helpers.createSection('input', 'toDoForm', 'formPriority', 'todoform')
+  helpers.createButton('Update', helpers.tester, 'toDoForm', 'formSubmit') 
   const projectInput = document.createElement('input');
   const nodle = document.getElementById('projectAdd');
   nodle.appendChild(projectInput);

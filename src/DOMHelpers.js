@@ -53,7 +53,7 @@ const helpers = (()=> {
       createSection('div',`todo-${i}`,`list-item${todoListPosition}`, 'listItem')
       const listNode = document.getElementById(`list-item${todoListPosition}`)
       listNode.innerHTML = e.title;
-      listNode.addEventListener('click', () => test(i,currentProject.name,todoListPosition));
+      listNode.addEventListener('click', () => todoDetails(i,currentProject.name,todoListPosition));
 
     })
 
@@ -65,16 +65,63 @@ const helpers = (()=> {
 
   }
 
-  const test = (i, p, x) => {
+  const modalMenu = () => {
+
+    const modal = document.getElementById('toDoModal');
+    const span = document.getElementById('todoClose');
+    span.onclick = () => modal.style.display ='none';
+    window.onclick = (event) => {
+      if(event.target == modal) {
+        modal.style.display = 'none';
+      }
+    }
+    modal.style.display = 'block';
+
+  }
+
+  const todoDetails = (i, p, x) => {
+    modalMenu();
+    const submitButton = document.getElementById('toDoForm')
+    if(submitButton === undefined) {
+      helpers.createButton('Update', () => tester(), 'toDoForm', 'formSubmit')
+    }
+
     console.log(`project number = ${i}`)
     console.log(`current project = ${p}`)
     console.log(`Todolist positon ${x}`)
+    const todoTitle = model.retrieveProjects()[i].retriveToDoLists()[x].title
+    const todoDescription = model.retrieveProjects()[i].retriveToDoLists()[x].description
+    const todoDueDate = model.retrieveProjects()[i].retriveToDoLists()[x].dueDate 
+    const todoPiority = model.retrieveProjects()[i].retriveToDoLists()[x].priority
+    const titleNode = document.getElementById('formTitle');
+    const descriptionNode = document.getElementById('formDescription');
+    const dueDateNode = document.getElementById('formDueDate');
+    const priorityNode = document.getElementById('formPriority');
 
-    model.retrieveProjects()[i].retriveToDoLists()[x].description = 'hello'
-    model.retrieveProjects()[i].retriveToDoLists()[x].dueDate = '19/03/2020'
-    model.retrieveProjects()[i].retriveToDoLists()[x].priority = 'High'
+    todoTitle !== undefined ? titleNode.value = todoTitle : titleNode.placeholder = 'Title';
+    todoDescription !== undefined ? descriptionNode.value = todoDescription: descriptionNode.placeholder = 'Add Description';
+    todoDueDate !== undefined ? dueDateNode.value = todoDueDate: dueDateNode.placeholder = 'Due Date';
+    todoPiority !== undefined ? priorityNode.value = todoPiority: priorityNode.placeholder = 'Priority';
+
     console.log(model.retrieveProjects()[i].retriveToDoLists()[x])
   }
+  const tester = () => {
+    const titleNode = document.getElementById('formTitle');
+    const descriptionNode = document.getElementById('formDescription');
+    const dueDateNode = document.getElementById('formDueDate');
+    const priorityNode = document.getElementById('formPriority');
+
+
+    clearInputText(descriptionNode.id)
+    clearInputText(dueDateNode.id)
+    clearInputText(priorityNode.id)
+    console.log('form submitted!')
+    const modal = document.getElementById('toDoModal');
+    modal.style.display = 'none';
+  }
+
+
+
 
   const testFunc = () => {
   
@@ -106,6 +153,7 @@ const helpers = (()=> {
     renderTodos,
     createNewTodo,
     testFunc,
+    tester,
   };
 })();
 
