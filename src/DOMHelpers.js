@@ -97,10 +97,11 @@ const helpers = (()=> {
     const modalForm = document.getElementsByClassName('form');
   
     modalForm[0].id = `${i}--${x}`;
-    const todoTitle = model.retrieveProjects()[i].retriveToDoLists()[x].title
-    const todoDescription = model.retrieveProjects()[i].retriveToDoLists()[x].description
-    const todoDueDate = model.retrieveProjects()[i].retriveToDoLists()[x].dueDate 
-    const todoPiority = model.retrieveProjects()[i].retriveToDoLists()[x].priority
+    const node = model.retrieveProjects()[i].retriveToDoLists()[x]
+    const todoTitle = localStorage.getItem(`title${i}--${x}`)
+    const todoDescription = localStorage.getItem(`description${i}--${x}`)
+    const todoDueDate = localStorage.getItem(`dueDate${i}--${x}`)
+    const todoPiority = localStorage.getItem(`priority${i}--${x}`)
     const titleNode = document.getElementById('formTitle');
     const descriptionNode = document.getElementById('formDescription');
     const dueDateNode = document.getElementById('formDueDate');
@@ -108,12 +109,12 @@ const helpers = (()=> {
     clearInputText(titleNode.id)
     clearInputText(descriptionNode.id)
     clearInputText(dueDateNode.id)
-    clearInputText(priorityNode.id)
+    // clearInputText(priorityNode.id)
 
     todoTitle !== undefined ? titleNode.value = todoTitle : titleNode.placeholder = 'Title';
     todoDescription !== undefined ? descriptionNode.value = todoDescription: descriptionNode.placeholder = 'Add Description';
     todoDueDate !== undefined ? dueDateNode.value = todoDueDate: dueDateNode.placeholder = 'Due Date';
-    todoPiority !== undefined ? priorityNode.value = todoPiority: priorityNode.placeholder = 'Priority';
+    todoPiority !== undefined ? priorityNode.value = todoPiority: priorityNode.value = 'Priority';
 
     
   }
@@ -123,25 +124,29 @@ const helpers = (()=> {
     const modalString = modalForm[0].id
     const i = modalString.slice(0, modalString.indexOf('-'))
     const x = modalString.slice(modalString.lastIndexOf('-')+1)
-  
-    
-  
     const titleNode = document.getElementById('formTitle');
     const descriptionNode = document.getElementById('formDescription');
     const dueDateNode = document.getElementById('formDueDate');
     const priorityNode = document.getElementById('formPriority');
-    model.retrieveProjects()[i].retriveToDoLists()[x].title = titleNode.value
-    model.retrieveProjects()[i].retriveToDoLists()[x].description = descriptionNode.value 
-    model.retrieveProjects()[i].retriveToDoLists()[x].dueDate = dueDateNode.value
-    model.retrieveProjects()[i].retriveToDoLists()[x].priority = priorityNode.value 
+    const node = model.retrieveProjects()[i].retriveToDoLists()[x];
+    node.title = titleNode.value
+    node.description = descriptionNode.value 
+    node.dueDate = dueDateNode.value
+    node.priority = priorityNode.value
 
-  
+    localStorage.setItem(`title${i}--${x}`, titleNode.value);
+    localStorage.setItem(`description${i}--${x}`, descriptionNode.value);
+    localStorage.setItem(`dueDate${i}--${x}`, dueDateNode.value);
+    localStorage.setItem(`priority${i}--${x}`, priorityNode.value);
+    console.log(localStorage);
+
     const modal = document.getElementById('toDoModal');
     modal.style.display = 'none';
+
+
+
+  
   }
-
-
-
 
 
   const testFunc = () => {
