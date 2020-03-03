@@ -14,9 +14,11 @@ const renderer = (() => {
   helpers.createSection('input', 'toDoForm', 'formDescription', 'todoform')
   helpers.createSection('input', 'toDoForm', 'formDueDate', 'todoform')
   helpers.createSection('input', 'toDoForm', 'formPriority', 'todoform')
-  helpers.createButton('Update', helpers.tester, 'toDoForm', 'formSubmit') 
+  helpers.createButton('Update', helpers.tester, 'toDoModalContent', 'formSubmit')
   const projectInput = document.createElement('input');
   const nodle = document.getElementById('projectAdd');
+  const dueDateCalendar = document.getElementById('formDueDate');
+  dueDateCalendar.type = 'date';
   nodle.appendChild(projectInput);
   projectInput.id = 'newProjectName';
 })();

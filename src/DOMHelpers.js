@@ -11,6 +11,16 @@ const helpers = (()=> {
     node.appendChild(button);
   };
 
+  const createBlankButton = (text, attachId, buttonId) => {
+    const node = document.getElementById(`${attachId}`);
+    const button = document.createElement('button');
+    button.classList.add('buttons');
+    button.id = buttonId;
+    button.innerHTML = text
+    node.appendChild(button);
+
+  }
+
   const createSection = (sectionType, attachId, sectionId, sectionClass) => {
     const node = document.getElementById(`${attachId}`);
     const section = document.createElement(`${sectionType}`);
@@ -54,9 +64,10 @@ const helpers = (()=> {
       const listNode = document.getElementById(`list-item${todoListPosition}`)
       listNode.innerHTML = e.title;
       listNode.addEventListener('click', () => todoDetails(i,currentProject.name,todoListPosition));
+      
 
     })
-
+  
   }
 
   const createNewTodo = () => {
@@ -81,14 +92,11 @@ const helpers = (()=> {
 
   const todoDetails = (i, p, x) => {
     modalMenu();
-    const submitButton = document.getElementById('toDoForm')
-    if(submitButton === undefined) {
-      helpers.createButton('Update', () => tester(), 'toDoForm', 'formSubmit')
-    }
+  
 
-    console.log(`project number = ${i}`)
-    console.log(`current project = ${p}`)
-    console.log(`Todolist positon ${x}`)
+    const modalForm = document.getElementsByClassName('form');
+  
+    modalForm[0].id = `${i}--${x}`;
     const todoTitle = model.retrieveProjects()[i].retriveToDoLists()[x].title
     const todoDescription = model.retrieveProjects()[i].retriveToDoLists()[x].description
     const todoDueDate = model.retrieveProjects()[i].retriveToDoLists()[x].dueDate 
@@ -97,28 +105,41 @@ const helpers = (()=> {
     const descriptionNode = document.getElementById('formDescription');
     const dueDateNode = document.getElementById('formDueDate');
     const priorityNode = document.getElementById('formPriority');
+    clearInputText(titleNode.id)
+    clearInputText(descriptionNode.id)
+    clearInputText(dueDateNode.id)
+    clearInputText(priorityNode.id)
 
     todoTitle !== undefined ? titleNode.value = todoTitle : titleNode.placeholder = 'Title';
     todoDescription !== undefined ? descriptionNode.value = todoDescription: descriptionNode.placeholder = 'Add Description';
     todoDueDate !== undefined ? dueDateNode.value = todoDueDate: dueDateNode.placeholder = 'Due Date';
     todoPiority !== undefined ? priorityNode.value = todoPiority: priorityNode.placeholder = 'Priority';
 
-    console.log(model.retrieveProjects()[i].retriveToDoLists()[x])
+    
   }
   const tester = () => {
+   
+    const modalForm = document.getElementsByClassName('form');
+    const modalString = modalForm[0].id
+    const i = modalString.slice(0, modalString.indexOf('-'))
+    const x = modalString.slice(modalString.lastIndexOf('-')+1)
+  
+    
+  
     const titleNode = document.getElementById('formTitle');
     const descriptionNode = document.getElementById('formDescription');
     const dueDateNode = document.getElementById('formDueDate');
     const priorityNode = document.getElementById('formPriority');
+    model.retrieveProjects()[i].retriveToDoLists()[x].title = titleNode.value
+    model.retrieveProjects()[i].retriveToDoLists()[x].description = descriptionNode.value 
+    model.retrieveProjects()[i].retriveToDoLists()[x].dueDate = dueDateNode.value
+    model.retrieveProjects()[i].retriveToDoLists()[x].priority = priorityNode.value 
 
-
-    clearInputText(descriptionNode.id)
-    clearInputText(dueDateNode.id)
-    clearInputText(priorityNode.id)
-    console.log('form submitted!')
+  
     const modal = document.getElementById('toDoModal');
     modal.style.display = 'none';
   }
+
 
 
 
@@ -146,6 +167,7 @@ const helpers = (()=> {
 
   return {
     createButton,
+    createBlankButton,
     createSection,
     addInnerHTML,
     clearInputText,
