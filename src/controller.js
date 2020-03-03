@@ -13,11 +13,16 @@ const controller = (() => {
     helpers.clearInputText('newProjectName');
     const data = model.retrieveProjects();
     data.forEach((e) => {
-      const id = `project-id${data.indexOf(e)}`;
-      helpers.createSection('div', 'projectArea', id, 'x');
-      helpers.createButton(e.name, () => helpers.renderTodos(e), id, e.name);
+      const id = `${data.indexOf(e)}`;
+      helpers.createSection('div', 'projectArea', `project-${id}`, 'x');
+      helpers.createButton(e.name, () => helpers.renderTodos(data.indexOf(e)), 'projectArea', e.name);
+      
     });
-  }, 'projectAdd', 'hello');
+  }, 'projectAdd', 'buttons');
+  helpers.createNewTodo();
+
+
+  
 
 })();
 

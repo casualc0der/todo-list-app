@@ -1,8 +1,8 @@
 const model = (() => {
   const project = (name) => {
     const todoLists = [];
-    const addToDoList = (title, description) => {
-      todoLists.push({title, description});
+    const addToDoList = (title, description, dueDate, priority) => {
+      todoLists.push({title, description, dueDate, priority});
     };
     const retriveToDoLists = () => todoLists;
 
