@@ -10,8 +10,14 @@ const controller = (() => {
   helpers.createButton('Add project', () => {
     helpers.clearSection('projectArea');
     model.createProject(newProjectName.value);
+    "localProjects" in localStorage ? console.log('yes!'): console.log('no!')
+    const localProjects = model.retrieveProjects();
+    localStorage.setItem('localProjects', JSON.stringify(localProjects));
     helpers.clearInputText('newProjectName');
-    const data = model.retrieveProjects();
+    const data = JSON.parse(localStorage.getItem('localProjects'));
+    console.log(data)
+    console.log(localStorage)
+    // const data = model.retrieveProjects();
     data.forEach((e) => {
       const id = `${data.indexOf(e)}`;
       helpers.createSection('div', 'projectArea', `project-${id}`, 'x');

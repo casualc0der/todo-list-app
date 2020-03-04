@@ -98,10 +98,10 @@ const helpers = (()=> {
   
     modalForm[0].id = `${i}--${x}`;
     const node = model.retrieveProjects()[i].retriveToDoLists()[x]
-    const todoTitle = localStorage.getItem(`title${i}--${x}`)
-    const todoDescription = localStorage.getItem(`description${i}--${x}`)
-    const todoDueDate = localStorage.getItem(`dueDate${i}--${x}`)
-    const todoPiority = localStorage.getItem(`priority${i}--${x}`)
+    const todoTitle = node.title
+    const todoDescription = node.description
+    const todoDueDate = node.dueDate 
+    const todoPiority = node.priority
     const titleNode = document.getElementById('formTitle');
     const descriptionNode = document.getElementById('formDescription');
     const dueDateNode = document.getElementById('formDueDate');
@@ -132,20 +132,12 @@ const helpers = (()=> {
     node.title = titleNode.value
     node.description = descriptionNode.value 
     node.dueDate = dueDateNode.value
-    node.priority = priorityNode.value
-
-    localStorage.setItem(`title${i}--${x}`, titleNode.value);
-    localStorage.setItem(`description${i}--${x}`, descriptionNode.value);
-    localStorage.setItem(`dueDate${i}--${x}`, dueDateNode.value);
-    localStorage.setItem(`priority${i}--${x}`, priorityNode.value);
-    console.log(localStorage);
-
+    node.priority = priorityNode.value 
+    
+  
     const modal = document.getElementById('toDoModal');
     modal.style.display = 'none';
 
-
-
-  
   }
 
 
@@ -157,11 +149,19 @@ const helpers = (()=> {
     const currentTodo = node[0].id;
     const todoID = parseInt(currentTodo.slice(5))
     const projects = model.retrieveProjects()
+    
     projects.forEach((e) => { 
-      if(todoID === projects.indexOf(e)) {
+      const index = projects.indexOf(e)
+      if(todoID === index) {
         if(!todoTitle.value) { return }; //add error message
           e.addToDoList(todoTitle.value);
           renderTodos(todoID);
+          const hello = e.retriveToDoLists()
+          const derp = JSON.parse(localStorage.getItem(['localProjects']))
+          const nerp = JSON.parse(localStorage.getItem(['localProjects']))
+          localStorage.setItem([`todos-${index}`], JSON.stringify(hello))
+         const goob = Object.entries(localStorage)
+         console.log(goob)
           }
         })
 
